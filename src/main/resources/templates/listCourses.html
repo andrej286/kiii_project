@@ -1,0 +1,86 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>Welcome and Choose a Course</title>
+    <style type="text/css">
+        body {
+            width: 800px;
+            margin: auto;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <h1>Courses List</h1>
+</header>
+<main>
+    <h2>Choose course:</h2>
+
+
+<!--    <form action="/courses/add" method="POST">-->
+<!--        <h2>Add new Course</h2><br/>-->
+<!--        <label for='courseName'>Name:</label><input id='courseName' type='text' name='courseName'/><br/>-->
+<!--        <label for='description'>Description:</label><input id='description' type='text' name='description'/><br/>-->
+<!--        <label for='teacherId'>Id:</label><input id='teacherId' type='text' name='teacherId'/><br/>-->
+<!--        <input type="submit" th:value="Submit">-->
+<!--    </form>-->
+
+
+    <form action="/students/list" method="POST">
+        <h2>Add new Student to Course</h2><br/>
+    <ul>
+        <div th:each="cours: ${courses}">
+            <input type="radio" th:name="courseId" th:value="${cours.getCourseId()}"><th:block th:text="${cours.getName()}"/>
+
+            <th:block sec:authorize="hasRole('ROLE_ADMIN')">
+            <a th:href="@{'/courses/delete/{id}' (id=${cours.getCourseId()})}" type="button" >DELETE</a>
+            <a th:href="@{'/courses/edit-form/{id}' (id=${cours.getCourseId()})}" type="button" ><i class="fa fa-trash">Edit</i></a>
+            </th:block>
+
+<!--            <form th:action="@{'/courses/delete/{id}' (id=${cours.getCourseId()})}" th:method="DELETE">-->
+<!--                <button type="submit" class="btn btn-sm btn-danger"><i class="fa fa-trash">Delete</i></button>-->
+<!--            </form>-->
+        </div>
+    </ul>
+        <input type="submit" th:value="Submit">
+    </form>
+    <br/>
+
+    <div th:if="${hasError}">
+        <h5 class="text-center text-danger" th:text="${error}"></h5>
+    </div>
+
+
+
+
+    <!--    <form action="/courses/add-form" method="GET">-->
+<!--        <input type="submit" th:value="Submit_new_course">-->
+<!--    </form>-->
+      <a href="/courses/add-form" type="button" >Add new Course</a><br/>
+    <a href="/courses/add-teacher-form" type="button" >Add new Teacher</a>
+
+
+
+<!--        <h2>Delete Course</h2><br/>-->
+<!--        <ul>-->
+<!--            <div th:each="cours: ${courses}">-->
+<!--                <th:block th:text="${cours.getName()}"/>-->
+<!--                <form th:action="@{'/courses/delete/{id}' (id=${cours.getCourseId()})}" th:method="DELETE">-->
+<!--&lt;!&ndash;                <form th:action="@{'\\/products/delete/{id}' (id=${cours.getCourseId()})}" th:method="DELETE">&ndash;&gt;-->
+<!--                    <button type="submit" class="btn btn-sm btn-danger"><i class="fa fa-trash">Delete</i></button>-->
+<!--                </form>-->
+<!--            </div>-->
+<!--        </ul>-->
+
+
+
+
+
+  <br/>
+
+
+
+
+</main>
+</body>
+</html>

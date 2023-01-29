@@ -1,0 +1,28 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>Welcome and add Choose a Course</title>
+    <style type="text/css">
+        body {
+            width: 800px;
+            margin: auto;
+        }
+    </style>
+</head>
+<body>
+<header>
+</header>
+<main>
+    <h2>Add teacher:</h2>
+
+    <form th:action="@{'/courses/add-teacher'}" th:method="POST">
+
+        <h2>Add new Teacher</h2><br/>
+        <label for='name'>Name:</label><input id='name' type='text' name='name' /><br/>
+        <label for='surname'>Surname:</label><input id='surname' type='text' name='surname'/><br/>
+        <input type="submit" th:value="Submit">
+    </form>
+
+</main>
+</body>
+</html>

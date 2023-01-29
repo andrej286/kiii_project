@@ -1,0 +1,92 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>Welcome and add Choose a Course</title>
+    <style type="text/css">
+        body {
+            width: 800px;
+            margin: auto;
+        }
+    </style>
+</head>
+<body>
+<header>
+</header>
+<main>
+    <h2>Add course:</h2>
+
+    <form th:if="${courseId} != null" th:action="@{'/courses/add/{id}' (id=${courseId})}" th:method="POST">
+
+        <h2>Add new Course</h2><br/>
+        <label for='courseName'>Name:</label><input th:value="(${courseName} != null ? ${courseName} : '')" id='courseName' type='text' name='courseName' /><br/>
+        <label for='description'>Description:</label><input th:value="(${description} != null ? ${description} : '')"  id='description' type='text' name='description'/><br/>
+
+        <select name="teacherId" >
+            <option th:if="${teacherName} == null" th:each="teacher: ${teachers}" th:name='teacherId' th:value="${teacher.getId()}" th:text="${teacher.getName()}"></option>
+            <option th:if="${teacherName} != null"  th:selected="${teacherName != null && teacherName==teacher.getName()}"
+                    th:each="teacher: ${teachers}" th:name='teacherId' th:value="${teacher.getId()}" th:text="${teacher.getName()}"></option>
+        </select>
+        <div th:if="${courseId} != null"> The course id is <h3 th:name="courseId" th:value="${courseId}" th:text="${courseId}"></h3>
+        </div>
+                <input type="submit" th:value="Submit">
+            </form>
+
+
+
+
+        <form th:if="${courseId} == null" action="/courses/add" method="POST">
+            <h2>Add new Course</h2><br/>
+            <label for='courseName'>Name:</label><input th:value="(${courseName} != null ? ${courseName} : '')" id='courseName2' type='text' name='courseName' /><br/>
+            <label for='description'>Description:</label><input th:value="(${description} != null ? ${description} : '')"  id='description2' type='text' name='description'/><br/>
+
+            <select name="teacherId" >
+                <option th:if="${teacherName} == null" th:each="teacher: ${teachers}" th:name='teacherId' th:value="${teacher.getId()}" th:text="${teacher.getName()}"></option>
+
+                <option th:if="${teacherName} != null"  th:selected="${teacherName != null && teacherName==teacher.getName()}"
+                        th:each="teacher: ${teachers}" th:name='teacherId' th:value="${teacher.getId()}" th:text="${teacher.getName()}"></option>
+            </select>
+            <input type="submit" th:value="Submit">
+        </form>
+
+
+
+    <div th:if="${hasError}">
+        <h5 class="text-center text-danger" th:text="${error}"></h5>
+    </div>
+
+
+
+
+    <!--    <form action="/courses/add" method="POST">-->
+<!--        <h2>Add new Course</h2><br/>-->
+<!--        <label for='courseName'>Name:</label><input th:value="(${courseName} != null ? ${courseName} : '')" id='courseName' type='text' name='courseName' /><br/>-->
+<!--        <label for='description'>Description:</label><input th:value="(${description} != null ? ${description} : '')"  id='description' type='text' name='description'/><br/>-->
+
+<!--        <select name="teacherId" >-->
+<!--            <option th:if="${teacherName} == null" th:each="teacher: ${teachers}" th:name='teacherId' th:value="${teacher.getId()}" th:text="${teacher.getName()}"></option>-->
+
+<!--            <option th:if="${teacherName} != null"  th:selected="${teacherName != null && teacherName==teacher.getName()}"-->
+<!--                    th:each="teacher: ${teachers}" th:name='teacherId' th:value="${teacher.getId()}" th:text="${teacher.getName()}"></option>-->
+
+
+
+<!--        </select>-->
+
+<!--        <div th:if="${courseId} != null"> The course id is <h3 th:name="courseId" th:value="${courseId}" th:text="${courseId}"></h3>-->
+<!--            <input th:value="${courseId}" type='text' name='courseId'/>-->
+
+<!--        </div>-->
+
+<!--        <input type="submit" th:value="Submit">-->
+<!--    </form>-->
+
+
+
+
+
+
+
+
+</main>
+</body>
+</html>
