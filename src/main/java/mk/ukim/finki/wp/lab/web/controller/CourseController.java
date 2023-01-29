@@ -34,7 +34,7 @@ public class CourseController {
   @GetMapping
   public String getCoursesPage(@RequestParam(required = false) String error, Model model) {
 
-    this.courseService.listAllCourses().sort(Comparator.comparing(i -> i.getName()));
+    this.courseService.listAllCourses().sort(Comparator.comparing(Course::getName));
     model.addAttribute("courses", this.courseService.listAllCourses());
 
     LocalDateTime localDateTime = LocalDateTime.now();
@@ -72,7 +72,11 @@ public class CourseController {
 
   @PostMapping("/add/{id}")
   @Transactional
-  public String saveCourse(@RequestParam String courseName, @RequestParam String description, @RequestParam Long teacherId, @PathVariable Long id, Model model) {
+  public String saveCourse(
+          @RequestParam String courseName,
+          @RequestParam String description,
+          @RequestParam Long teacherId,
+          @PathVariable Long id, Model model) {
 
 
     try {
@@ -102,7 +106,11 @@ public class CourseController {
 
   @PostMapping("/add")
   @Transactional
-  public String saveNewCourse(@RequestParam String courseName, @RequestParam String description, @RequestParam Long teacherId, Model model) {
+  public String saveNewCourse(
+          @RequestParam String courseName,
+          @RequestParam String description,
+          @RequestParam Long teacherId,
+          Model model) {
 
     List<Student> students = new ArrayList<>();
     try {
