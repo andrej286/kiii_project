@@ -116,6 +116,8 @@ public class CourseController {
       model.addAttribute("courseName", courseName);
       model.addAttribute("description", description);
 
+      log.error("this course name already exists");
+
       return "add-course";
     }
 
