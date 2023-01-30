@@ -46,4 +46,4 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: andrej286/kiii_repo:latest
+          tags: andrej286/kiii_repo
