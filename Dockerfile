@@ -5,6 +5,7 @@ COPY pom.xml /home/app
 RUN mvn -f /home/app/pom.xml clean package
 
 # Execution StageFROM openjdk:17-oracle
+FROM openjdk:17-oracle
 ADD target/spring-docker-kiii.jar spring-docker-kiii.jar
 ENTRYPOINT ["java","-jar","spring-docker-kiii.jar"]
 EXPOSE 9090
