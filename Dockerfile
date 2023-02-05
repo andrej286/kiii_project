@@ -18,6 +18,6 @@ RUN mvn clean install -DskipTests
 
 # Execution StageFROM openjdk:17-oracle
 FROM openjdk:17-oracle
-COPY --from=build  /home/app/target/spring-docker-kiii.jar /usr/local/lib/spring-docker-kiii.jar
+ADD target/spring-docker-kiii.jar spring-docker-kiii.jar
 ENTRYPOINT ["java","-jar","/usr/local/lib/spring-docker-kiii.jar"]
 EXPOSE 9090
