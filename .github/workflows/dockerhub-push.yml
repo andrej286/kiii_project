@@ -21,13 +21,3 @@ jobs:
           cache: maven
       - name: Build with Maven
         run: mvn clean install -Dmaven.test.skip=true
-
-      - name: Build & push Docker image
-        uses: mr-smithers-excellent/docker-build-push@v5
-        with:
-          image: andrej286/spring-docker-kiii
-          tags: latest
-          registry: andrej286
-          dockerfile: Dockerfile
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
