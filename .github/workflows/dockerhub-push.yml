@@ -27,7 +27,7 @@ jobs:
         with:
           image: andrej286/spring-docker-kiii
           tags: latest
-          registry: docker.io
+          registry: andrej286
           dockerfile: Dockerfile
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
