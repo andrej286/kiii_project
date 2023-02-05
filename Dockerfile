@@ -1,8 +1,20 @@
-# Build Stage
-FROM maven:3.8-openjdk-17-slim AS build
-COPY src /home/app/src
-COPY pom.xml /home/app
-RUN mvn /home/app/pom.xml -Dmaven.test.skip
+# Use an official Java image as the base image
+FROM openjdk:17-oracle
+
+# Set the working directory
+WORKDIR /app
+
+# Copy the pom.xml file to the container
+COPY pom.xml .
+
+# Download all required dependencies
+RUN mvn dependency:go-offline -B
+
+# Copy the rest of the project files to the container
+COPY . .
+
+# Build the project without running tests
+RUN mvn clean install -DskipTests
 
 # Execution StageFROM openjdk:17-oracle
 FROM openjdk:17-oracle
