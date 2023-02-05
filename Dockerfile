@@ -6,6 +6,6 @@ RUN mvn -f /home/app/pom.xml clean package
 
 # Execution StageFROM openjdk:17-oracle
 FROM openjdk:17-oracle
-ADD --from=build  /home/app/target/spring-docker-kiii.jar /usr/local/lib/spring-docker-kiii.jar
+COPY --from=build  /home/app/target/spring-docker-kiii.jar /usr/local/lib/spring-docker-kiii.jar
 ENTRYPOINT ["java","-jar","/usr/local/lib/spring-docker-kiii.jar"]
 EXPOSE 9090
