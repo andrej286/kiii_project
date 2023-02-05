@@ -1,4 +1,4 @@
-# Use an official Java image as the base image
+# Use openjdk base image
 FROM openjdk:17-oracle
 
 # Set the working directory
@@ -7,17 +7,15 @@ WORKDIR /app
 # Copy the pom.xml file to the container
 COPY pom.xml .
 
-# Download all required dependencies
-RUN mvn dependency:go-offline -B
+# Run Maven to download dependencies
+RUN mvn dependency:go-offline
 
-# Copy the rest of the project files to the container
+# Copy the rest of the project files
 COPY . .
 
-# Build the project without running tests
-RUN mvn clean install -DskipTests
+# Run Maven to build the project without tests
+RUN mvn clean install -Dmaven.test.skip=true
 
-# Execution StageFROM openjdk:17-oracle
-FROM openjdk:17-oracle
-ADD target/spring-docker-kiii.jar spring-docker-kiii.jar
-ENTRYPOINT ["java","-jar","/usr/local/lib/spring-docker-kiii.jar"]
+# Run the application
+CMD ["java", "-jar", "target/spring-docker-kiii.jar"]
 EXPOSE 9090
