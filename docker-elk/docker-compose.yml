@@ -18,7 +18,7 @@ services:
       driver: gelf
       options:
         gelf-address: "udp://0.0.0.0:5000"
-        tag: "bookapi_app_2"
+        tag: "spring_app_2"
     networks:
       - elk
 
